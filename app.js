@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addAnecdote, upvoteAnecdote, downvoteAnecdote, filterAnecdotes } from './actions';
 import AnecdoteForm from './components/AnecdoteForm';
 import AnecdoteList from './components/AnecdoteList';
+import Filter from './components/Filter'; // Import the Filter component
 
 const App = () => {
   const [newAnecdote, setNewAnecdote] = useState('');
@@ -40,21 +41,13 @@ const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
+      <Filter onFilterChange={handleFilterChange} filter={filter} /> {/* Pass props to Filter */}
       <AnecdoteForm
         value={newAnecdote}
         onChange={handleAnecdoteChange}
         onSubmit={createAnecdote}
       />
-      <input
-        value={filter}
-        onChange={handleFilterChange}
-        placeholder="Search..."
-      />
-      <AnecdoteList
-        anecdotes={anecdotes}
-        onUpvote={handleUpvote}
-        onDownvote={handleDownvote}
-      />
+      <AnecdoteList anecdotes={anecdotes} onUpvote={handleUpvote} onDownvote={handleDownvote} />
     </div>
   );
 };
