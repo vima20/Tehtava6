@@ -2,30 +2,24 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 import AppContent from './AppContent';
-import { addAnecdote, upvoteAnecdote, downvoteAnecdote } from './reducers/anecdoteReducer'; // Import action creators
+import { addAnecdote, upvoteAnecdote, downvoteAnecdote } from './reducers/anecdoteReducer';
+import { setFilter } from './reducers/filterReducer';
+import Notification from './components/Notification'; // Assuming Notification component exists
 
 const App = () => {
-  const dispatch = useDispatch(); // Get dispatch function from Redux
+  const dispatch = useDispatch();
+  const notificationMessage = useSelector((state) => state.notification.message);
 
-  const handleAnecdoteChange = (event) => {
-    setNewAnecdote(event.target.value);
-  };
+  // ... rest of the App component logic
 
-  const createAnecdote = (event) => {
-    event.preventDefault();
-    dispatch(addAnecdote(newAnecdote)); // Dispatch the addAnecdote action
-    setNewAnecdote('');
-  };
-
-  const handleUpvote = (id) => {
-    dispatch(upvoteAnecdote(id));
-  };
-
-  const handleDownvote = (id) => {
-    dispatch(downvoteAnecdote(id));
-  };
-
-  // ... rest of the App component
+  return (
+    <Provider store={store}>
+      <div>
+        <Notification message={notificationMessage} />
+        <AppContent />
+      </div>
+    </Provider>
+  );
 };
 
 export default App;
