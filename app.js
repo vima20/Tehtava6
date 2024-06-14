@@ -1,21 +1,17 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store';
-import AppContent from './AppContent';
-import { addAnecdote, upvoteAnecdote, downvoteAnecdote } from './reducers/anecdoteReducer';
-import { setFilter } from './reducers/filterReducer';
-import Notification from './components/Notification'; // Assuming Notification component exists
+// ... other imports
 
 const App = () => {
   const dispatch = useDispatch();
   const notificationMessage = useSelector((state) => state.notification.message);
+  const showNotification = useSelector((state) => state.notification.showNotification);
 
-  // ... rest of the App component logic
+  // ... other component logic
 
   return (
     <Provider store={store}>
       <div>
-        <Notification message={notificationMessage} />
+        {showNotification && <Notification message={notificationMessage} />}
         <AppContent />
       </div>
     </Provider>
