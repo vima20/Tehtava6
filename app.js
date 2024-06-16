@@ -15,7 +15,7 @@ const App = () => {
   }, []); // Empty dependency array to run only once on mount
 
   const handleAddAnecdote = (content) => {
-    dispatch(addAnecdote(content));
+    dispatch(createAnecdote(content));
   };
 
   const handleVote = (id, anecdote) => {
